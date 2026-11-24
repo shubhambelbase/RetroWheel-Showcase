@@ -50,6 +50,14 @@ It plays local audio files directly from your phone (MP3, FLAC, AAC, WAV) with z
 | <img src="screenshots/07_now_playing_dark.jpg" alt="Dark theme" width="360" /> | <img src="screenshots/08_cover_flow_gold.jpg" alt="Gold theme" width="360" /> |
 | Pure black background for OLED screens | Brushed metallic gold wheel |
 
+### Landscape Desk Dock Mode
+
+Rotate your phone sideways on a desk stand or nightstand to turn it into a dedicated Hi-Fi desktop player:
+
+<p align="center">
+  <img src="screenshots/09_landscape_desk_dock.jpg" alt="RetroWheel Landscape Desk Dock Mode" width="850" />
+</p>
+
 ---
 
 ## What you get
@@ -59,6 +67,10 @@ It plays local audio files directly from your phone (MP3, FLAC, AAC, WAV) with z
 - Real vibration feedback on every tick so you feel each step.
 - Four click sounds to pick from: Classic Clicker, Ceramic, Soft Relay, or Silent.
 - Dedicated button quadrants for Menu, Play/Pause, Next, Previous, and center Select.
+
+### Landscape Desk Dock
+- Rotate your phone sideways at any time to switch into a full-width desktop mode.
+- Shows large 3D album artwork with floor reflections, live track details, progress scrubber, and touch playback buttons.
 
 ### 3D Cover Flow
 - Flip through your album covers in a 3D perspective stack.

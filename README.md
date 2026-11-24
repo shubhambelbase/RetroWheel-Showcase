@@ -1,7 +1,7 @@
 # RetroWheel — Luxury Tactile Rotary DAP for Android
 
 <p align="center">
-  <img src="screenshots/heritage_themes.png" alt="RetroWheel Heritage Themes" width="850" />
+  <img src="screenshots/theme_materials_comparison.jpg" alt="RetroWheel Luxury Hardware Materials" width="950" />
 </p>
 
 <p align="center">
@@ -22,9 +22,30 @@
 
 **RetroWheel** reimagines the golden age of portable audio for modern audiophiles. Built from the ground up for Android, it pairs tactile circular thumb navigation with an uncompromising, bit-perfect audiophile DSP engine. Active listening is never interrupted by unprompted audio or full-screen ads.
 
-<p align="center">
-  <img src="screenshots/dark_heritage.png" alt="RetroWheel Dark Themes" width="850" />
-</p>
+---
+
+## 📱 Real Device Showcase (Captured on Android)
+
+### 🎵 Core Listening & Navigation
+
+| 🎧 Now Playing (Bit-Perfect) | 💿 3D Cover Flow Carousel | 📂 Split-Pane Library View |
+|:---:|:---:|:---:|
+| <img src="screenshots/01_now_playing_silver.jpg" alt="Now Playing Silver" width="280" /> | <img src="screenshots/02_cover_flow_3d.jpg" alt="Cover Flow 3D" width="280" /> | <img src="screenshots/03_songs_split_view.jpg" alt="Songs Split View" width="280" /> |
+| **Live Stream & Codec Badges** | **Rotary Flywheel Physics** | **Live Album Artwork Preview** |
+
+### ⚡ Interactive Features & Gaming
+
+| 📜 Interactive Play Queue | 🎨 Luxury Theme Studio | 🕹️ Retro Music Quiz Minigame |
+|:---:|:---:|:---:|
+| <img src="screenshots/04_now_playing_queue.jpg" alt="Now Playing Queue" width="280" /> | <img src="screenshots/05_skin_theme_studio.jpg" alt="Skin & Theme Studio" width="280" /> | <img src="screenshots/06_retro_music_quiz.jpg" alt="Retro Music Quiz" width="280" /> |
+| **One-Tap Queue Drawer** | **Hardware Finishes & Preview** | **Authentic Click-Wheel Trivia** |
+
+### 🌌 Exotic Hardware Finishes
+
+| 🌑 Obsidian Stealth / Sapphire (OLED) | 👑 24K Champagne Gold Edition |
+|:---:|:---:|
+| <img src="screenshots/07_now_playing_dark.jpg" alt="Now Playing Dark Theme" width="360" /> | <img src="screenshots/08_cover_flow_gold.jpg" alt="Cover Flow Gold Theme" width="360" /> |
+| **High-Contrast Night Mode** | **Luxury Brushed Metallic Accents** |
 
 ---
 
@@ -50,7 +71,7 @@
 - **Alphabet Scrub Overlay**: Rapid alphabet jumping when scrubbing through large multi-thousand track music libraries.
 
 ### 4. 🎨 Custom Skin Studio & Luxury Themes
-- **Built-in Luxury Finishes**: Porcelain White, Precision Titanium, Stealth Black, Monochrome OLED, 24K Champagne Gold, U2 Crimson, and Midnight Sapphire.
+- **Built-in Luxury Finishes**: Classic Porcelain White, Obsidian Stealth, Monochrome Heritage, 24K Champagne Gold, Crimson Edition (U2), and Midnight Sapphire.
 - **Web-Based Skin Studio**: Interactive 2D/3D browser studio (`skin_studio/index.html`) to design custom `.rtskin` bundles with custom textures, wheel geometry, and color palettes.
 - **Safe Import/Export**: One-click ZIP/QR import with cryptographic bundle validation and memory-safe downsampling.
 
@@ -60,7 +81,7 @@
 
 The official production-hardened release APK is available directly on GitHub Releases:
 
-👉 **[Download Latest Release APK](https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest)**
+👉 **[Download Latest Release APK (v1.0.0)](https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest)**
 
 ### Requirements
 - **OS**: Android 8.0 Oreo (API level 26) up to Android 15 / 16 (API level 36).

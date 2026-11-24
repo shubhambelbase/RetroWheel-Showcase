@@ -54,11 +54,6 @@
 - **Web-Based Skin Studio**: Interactive 2D/3D browser studio (`skin_studio/index.html`) to design custom `.rtskin` bundles with custom textures, wheel geometry, and color palettes.
 - **Safe Import/Export**: One-click ZIP/QR import with cryptographic bundle validation and memory-safe downsampling.
 
-<p align="center">
-  <img src="screenshots/skin_studio_braun.png" alt="Skin Studio Braun Preset" width="48%" />
-  <img src="screenshots/skin_studio_white.png" alt="Skin Studio Minimal White" width="48%" />
-</p>
-
 ---
 
 ## 📥 Download & Installation

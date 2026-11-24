@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RetroWheel — iPod Classic Style Click-Wheel Music Player for Android</title>
+  <meta name="description" content="Spin the wheel, feel the haptic clicks, and flip through albums in 3D Cover Flow. RetroWheel is an offline iPod Classic style music player for Android.">
+  <meta name="keywords" content="iPod Classic Android, click wheel music player, Android iPod emulator, Cover Flow Android, offline MP3 player, retro music player">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="RetroWheel — iPod Classic Music Player for Android">
+  <meta property="og:description" content="Spin the wheel, feel the haptic clicks, and browse your music library in 3D Cover Flow. 100% offline with a 10-band equalizer.">
+  <meta property="og:image" content="screenshots/theme_materials_comparison.jpg">
+  <meta property="og:url" content="https://shubhambelbase.github.io/RetroWheel-Showcase/">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0d11;
+      --bg-surface: #131720;
+      --bg-card: rgba(24, 29, 41, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.18);
+      --text-main: #f0f3f8;
+      --text-muted: #8b95a5;
+      --accent-blue: #0088ff;
+      --accent-cyan: #00e5ff;
+      --accent-glow: rgba(0, 136, 255, 0.25);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, rgba(11, 13, 17, 0) 70%);
+      z-index: -1;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(11, 13, 17, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 16px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #d1d5db, #ffffff, #9ca3af, #ffffff, #d1d5db);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.5);
+    }
+
+    .logo-icon::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #1f2937;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 999px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0088ff, #00d2ff);
+      color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 136, 255, 0.35);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0, 136, 255, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 90px 0 60px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(0, 136, 255, 0.12);
+      border: 1px solid rgba(0, 136, 255, 0.3);
+      color: #38bdf8;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, #ffffff 30%, #a0aec0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .hero-specs {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .hero-specs span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Device Mockup Showcase in Hero */
+    .hero-showcase {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .device-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    .device-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s;
+    }
+
+    .device-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-hover);
+    }
+
+    .device-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .device-card-label {
+      padding: 16px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Section Styling */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    .feature-box:hover {
+      border-color: var(--border-hover);
+      background: rgba(24, 29, 41, 0.9);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Landscape Desk Dock Spotlight */
+    .dock-banner-wrapper {
+      background: linear-gradient(180deg, rgba(19, 23, 32, 0.8) 0%, rgba(11, 13, 17, 0.95) 100%);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    }
+
+    .dock-image-container {
+      width: 100%;
+      background: #000;
+      position: relative;
+    }
+
+    .dock-image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .dock-info-grid {
+      padding: 36px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .dock-info-grid {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+    }
+
+    .dock-info-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .dock-info-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Theme Materials Strip */
+    .themes-strip-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      background: #000;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+
+    .themes-strip-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .theme-pills {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .theme-pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    /* Screenshots Grid (Interactive Gallery) */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.5);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery-caption {
+      padding: 12px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* CTA Section */
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(0, 136, 255, 0.15) 0%, rgba(0, 229, 255, 0.05) 100%);
+      border: 1px solid rgba(0, 136, 255, 0.3);
+      border-radius: 28px;
+      padding: 64px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+
+    .cta-banner p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .device-grid-3 {
+        grid-template-columns: 1fr;
+        max-width: 320px;
+      }
+      .hero {
+        padding: 50px 0 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-icon"></div>
+        <span>RetroWheel</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#desk-dock">Desk Dock</a>
+        <a href="#themes">Themes</a>
+        <a href="skin_studio/index.html" target="_blank">Skin Studio</a>
+      </nav>
+      <a href="https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest" class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download APK
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <span>✨ iPod Classic Nostalgia on Modern Android</span>
+      </div>
+      <h1>The tactile click-wheel player,<br>rebuilt for Android.</h1>
+      <p>
+        Spin the wheel with your thumb, feel physical vibration clicks on every tick, and flip through your album collection in 3D Cover Flow. 100% offline with zero audio ads.
+      </p>
+
+      <div class="hero-actions">
+        <a href="https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest" class="btn btn-primary" style="padding: 14px 32px; font-size: 1.05rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Release APK (v1.0.0)
+        </a>
+        <a href="https://github.com/shubhambelbase/RetroWheel-Showcase" target="_blank" class="btn btn-secondary" style="padding: 14px 28px; font-size: 1.05rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          GitHub Repository
+        </a>
+      </div>
+
+      <div class="hero-specs">
+        <span>⚡ Android 8.0 – 16</span>
+        <span>•</span>
+        <span>📦 ~7.5 MB Download</span>
+        <span>•</span>
+        <span>🚫 Zero Audio Ads</span>
+        <span>•</span>
+        <span>🎚️ 10-Band Equalizer</span>
+      </div>
+
+      <!-- Real Phone Screenshots in 3-Card Grid -->
+      <div class="hero-showcase">
+        <div class="device-grid-3">
+          <div class="device-card">
+            <img src="screenshots/01_now_playing_silver.jpg" alt="Now Playing Screen">
+            <div class="device-card-label">Now Playing & Bitrate Specs</div>
+          </div>
+          <div class="device-card" style="transform: translateY(-16px);">
+            <img src="screenshots/02_cover_flow_3d.jpg" alt="3D Cover Flow Carousel">
+            <div class="device-card-label" style="color: #38bdf8;">3D Cover Flow Carousel</div>
+          </div>
+          <div class="device-card">
+            <img src="screenshots/03_songs_split_view.jpg" alt="Split-Screen Songs Library">
+            <div class="device-card-label">Split-Screen Library</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Design & Engineering</span>
+        <h2 class="section-title">Built for the love of physical music</h2>
+        <p class="section-desc">Everything that made the classic click-wheel players magical, faithfully recreated with modern Android hardware capabilities.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-box">
+          <div class="feature-icon">🎛️</div>
+          <h3 class="feature-title">Touch Click-Wheel & Haptics</h3>
+          <p class="feature-desc">
+            Spin the wheel with continuous thumb gestures. Micro-vibrations trigger on every single notch detent with authentic mechanical acoustic clicks.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">💿</div>
+          <h3 class="feature-title">3D Cover Flow Browsing</h3>
+          <p class="feature-desc">
+            Flip through high-resolution album artwork in a real perspective stack. Flick to spin with momentum or tap any album to inspect its tracklist.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🎚️</div>
+          <h3 class="feature-title">10-Band EQ & Analog Warmth</h3>
+          <p class="feature-desc">
+            Sculpt frequencies across 10 bands or activate 12AX7 tube triode and 15-IPS analog tape saturation for rich acoustic warmth and vocal presence.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🎮</div>
+          <h3 class="feature-title">Retro Music Quiz Game</h3>
+          <p class="feature-desc">
+            The legendary iPod music trivia game is back. Listen to a 5-second audio snippet from your own music library and guess the track before time runs out.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🎨</div>
+          <h3 class="feature-title">Luxury Hardware Finishes</h3>
+          <p class="feature-desc">
+            Switch between Classic Porcelain, Obsidian Stealth OLED Black, U2 Crimson Edition, and 24K Champagne Gold with radial brushed metal wheels.
+          </p>
+        </div>
+
+        <div class="feature-box">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-title">100% Offline & Private</h3>
+          <p class="feature-desc">
+            No accounts, no signups, no tracking. RetroWheel plays your local MP3, FLAC, AAC, and WAV files directly from your phone's storage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Landscape Desk Dock Section -->
+  <section id="desk-dock">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Desktop Stand & Nightstand</span>
+        <h2 class="section-title">Landscape Desk Dock Mode</h2>
+        <p class="section-desc">Rotate your phone sideways to instantly transform it into a dedicated Hi-Fi desktop player with large 3D artwork and clean touch controls.</p>
+      </div>
+
+      <div class="dock-banner-wrapper">
+        <div class="dock-image-container">
+          <img src="screenshots/09_landscape_desk_dock.jpg" alt="RetroWheel Landscape Desk Dock Mode">
+        </div>
+        <div class="dock-info-grid">
+          <div>
+            <h3 class="dock-info-title">Automatic Horizontal Transformation</h3>
+            <p class="dock-info-desc">
+              Whether resting on a wireless charging stand on your work desk or perched on your nightstand, RetroWheel adapts to landscape with a wide studio display, floor reflections, and live audio bitrates.
+            </p>
+          </div>
+          <div>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; color: var(--text-muted); font-size: 0.95rem;">
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> 3D Cover Flow artwork carousel with real-time floor reflection
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> Clean Stereo Hi-Fi badges, progress scrubber, and touch playback buttons
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--accent-cyan); font-weight: bold;">✓</span> Zero screen burn-in: clean minimalist typography optimized for modern OLEDs
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Material Themes Section -->
+  <section id="themes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Craftsmanship</span>
+        <h2 class="section-title">Four Iconic Material Finishes</h2>
+        <p class="section-desc">Choose from handcrafted hardware finishes inspired by Braun industrial classics and legendary special editions.</p>
+      </div>
+
+      <div class="themes-strip-wrapper">
+        <img src="screenshots/theme_materials_comparison.jpg" alt="RetroWheel Material Themes Comparison">
+      </div>
+
+      <div class="theme-pills">
+        <div class="theme-pill">
+          <div class="color-dot" style="background: #e2e8f0;"></div>
+          <span>Classic Porcelain</span>
+        </div>
+        <div class="theme-pill">
+          <div class="color-dot" style="background: #111827;"></div>
+          <span>Obsidian Stealth (OLED)</span>
+        </div>
+        <div class="theme-pill">
+          <div class="color-dot" style="background: #dc2626;"></div>
+          <span>Crimson U2 Edition</span>
+        </div>
+        <div class="theme-pill">
+          <div class="color-dot" style="background: #eab308;"></div>
+          <span>24K Champagne Gold</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Gallery -->
+  <section id="screenshots">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">App Gallery</span>
+        <h2 class="section-title">Captured on Real Hardware</h2>
+        <p class="section-desc">Every screen is designed for authentic tactile simplicity, quick navigation, and uncompressed local music enjoyment.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="screenshots/01_now_playing_silver.jpg" alt="Now Playing">
+          <div class="gallery-caption">Now Playing (Silver)</div>
+        </div>
+        <div class="gallery-item">
+          <img src="screenshots/04_now_playing_queue.jpg" alt="Interactive Queue Drawer">
+          <div class="gallery-caption">Interactive Queue Drawer</div>
+        </div>
+        <div class="gallery-item">
+          <img src="screenshots/05_skin_theme_studio.jpg" alt="Theme Selector">
+          <div class="gallery-caption">Theme Studio & Passes</div>
+        </div>
+        <div class="gallery-item">
+          <img src="screenshots/06_retro_music_quiz.jpg" alt="Retro Music Quiz">
+          <div class="gallery-caption">Retro Music Quiz</div>
+        </div>
+        <div class="gallery-item">
+          <img src="screenshots/07_now_playing_dark.jpg" alt="Obsidian Dark Theme">
+          <div class="gallery-caption">Obsidian Stealth (OLED)</div>
+        </div>
+        <div class="gallery-item">
+          <img src="screenshots/08_cover_flow_gold.jpg" alt="24K Champagne Gold Cover Flow">
+          <div class="gallery-caption">24K Champagne Gold</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Skin Studio Callout -->
+  <section>
+    <div class="container">
+      <div class="cta-banner" style="background: linear-gradient(135deg, rgba(20, 24, 33, 0.9) 0%, rgba(30, 38, 54, 0.9) 100%);">
+        <span class="section-tag">Interactive Web Studio</span>
+        <h2>Design your own custom skins</h2>
+        <p>Use our companion browser-based studio to customize wheel geometry, upload custom faceplate textures, and export ready-to-use <code>.rtskin</code> bundles.</p>
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="skin_studio/index.html" target="_blank" class="btn btn-primary" style="padding: 14px 28px;">
+            Launch Skin Studio Simulator ↗
+          </a>
+          <a href="docs/SKIN_ENGINE_SPEC.md" target="_blank" class="btn btn-secondary" style="padding: 14px 28px;">
+            Skin Engine Specification
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download CTA Section -->
+  <section>
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Rediscover the joy of your music library</h2>
+        <p>No monthly subscriptions, no streaming algorithms, and no audio ads interrupting your flow. Just you, your favorite songs, and a click-wheel.</p>
+        <a href="https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest" class="btn btn-primary" style="padding: 16px 36px; font-size: 1.1rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download RetroWheel APK (Free)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>RetroWheel</strong> — Classic Click-Wheel Music Player for Android
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/shubhambelbase/RetroWheel-Showcase" target="_blank">GitHub</a>
+        <a href="https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest" target="_blank">Releases</a>
+        <a href="docs/PRIVACY_POLICY.md">Privacy Policy</a>
+        <a href="docs/STORE_METADATA.md">Store Metadata</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

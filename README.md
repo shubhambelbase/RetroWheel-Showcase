@@ -1,132 +1,121 @@
-# RetroWheel — Luxury Tactile Rotary DAP for Android
+# RetroWheel
 
 <p align="center">
-  <img src="screenshots/theme_materials_comparison.jpg" alt="RetroWheel Luxury Hardware Materials" width="950" />
+  <img src="screenshots/theme_materials_comparison.jpg" alt="RetroWheel Themes" width="950" />
 </p>
 
 <p align="center">
-  <strong>The definitive tactile click-wheel music player for Android.</strong><br>
-  An authentic fusion of classic Braun industrial design (Dieter Rams) and high-end Japanese Digital Audio Players (DAPs).
+  <strong>An iPod Classic style click-wheel music player for Android.</strong><br>
+  Spin the wheel, feel the clicks, and flip through your albums in 3D Cover Flow.
 </p>
 
 <p align="center">
   <a href="https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest"><img src="https://img.shields.io/badge/Download-Release_APK-00E5FF?style=for-the-badge&logo=android" alt="Download APK" /></a>
-  <img src="https://img.shields.io/badge/Platform-Android_8.0%2B_(API_26–36)-brightgreen?style=for-the-badge" alt="Android 8.0+" />
-  <img src="https://img.shields.io/badge/Audio_Engine-AndroidX_Media3-blue?style=for-the-badge" alt="AndroidX Media3" />
-  <img src="https://img.shields.io/badge/Architecture-Native_C%2B%2B_%2B_Compose-orange?style=for-the-badge" alt="Native C++" />
+  <img src="https://img.shields.io/badge/Platform-Android_8.0%2B-green?style=for-the-badge" alt="Android 8.0+" />
+  <img src="https://img.shields.io/badge/Offline-Local_Audio-blue?style=for-the-badge" alt="Local Audio" />
 </p>
 
 ---
 
-## 🎧 Overview
+## What is RetroWheel?
 
-**RetroWheel** reimagines the golden age of portable audio for modern audiophiles. Built from the ground up for Android, it pairs tactile circular thumb navigation with an uncompromising, bit-perfect audiophile DSP engine. Active listening is never interrupted by unprompted audio or full-screen ads.
+RetroWheel brings the classic iPod experience to your Android phone. If you miss loading your own MP3s and navigating your library with a physical-feeling click-wheel, this player is built for you.
+
+You get a full rotary wheel that responds to your thumb with real haptic vibrations and classic audio clicks, the original 3D Cover Flow album view, split-screen menus, and a 10-band equalizer.
+
+It plays local audio files directly from your phone (MP3, FLAC, AAC, WAV) with zero audio ads interrupting your listening.
 
 ---
 
-## 📱 Real Device Showcase (Captured on Android)
+## Screenshots
 
-### 🎵 Core Listening & Navigation
+### Core Screens
 
-| 🎧 Now Playing (Bit-Perfect) | 💿 3D Cover Flow Carousel | 📂 Split-Pane Library View |
+| Now Playing | 3D Cover Flow | Songs List |
 |:---:|:---:|:---:|
-| <img src="screenshots/01_now_playing_silver.jpg" alt="Now Playing Silver" width="280" /> | <img src="screenshots/02_cover_flow_3d.jpg" alt="Cover Flow 3D" width="280" /> | <img src="screenshots/03_songs_split_view.jpg" alt="Songs Split View" width="280" /> |
-| **Live Stream & Codec Badges** | **Rotary Flywheel Physics** | **Live Album Artwork Preview** |
+| <img src="screenshots/01_now_playing_silver.jpg" alt="Now Playing screen" width="280" /> | <img src="screenshots/02_cover_flow_3d.jpg" alt="3D Cover Flow" width="280" /> | <img src="screenshots/03_songs_split_view.jpg" alt="Songs split view" width="280" /> |
+| Audio specs, bitrate, and progress bar | Smooth 3D album art carousel | Classic split view with album preview |
 
-### ⚡ Interactive Features & Gaming
+### Features and Mini-Game
 
-| 📜 Interactive Play Queue | 🎨 Luxury Theme Studio | 🕹️ Retro Music Quiz Minigame |
+| Up Next Queue | Theme Picker | Retro Music Quiz |
 |:---:|:---:|:---:|
-| <img src="screenshots/04_now_playing_queue.jpg" alt="Now Playing Queue" width="280" /> | <img src="screenshots/05_skin_theme_studio.jpg" alt="Skin & Theme Studio" width="280" /> | <img src="screenshots/06_retro_music_quiz.jpg" alt="Retro Music Quiz" width="280" /> |
-| **One-Tap Queue Drawer** | **Hardware Finishes & Preview** | **Authentic Click-Wheel Trivia** |
+| <img src="screenshots/04_now_playing_queue.jpg" alt="Up Next Queue" width="280" /> | <img src="screenshots/05_skin_theme_studio.jpg" alt="Theme Picker" width="280" /> | <img src="screenshots/06_retro_music_quiz.jpg" alt="Music Quiz Mini-Game" width="280" /> |
+| Quick drawer showing the track queue | Pick from built-in hardware finishes | Guess the song from your library |
 
-### 🌌 Exotic Hardware Finishes
+### Color Themes
 
-| 🌑 Obsidian Stealth / Sapphire (OLED) | 👑 24K Champagne Gold Edition |
+| Obsidian Stealth (Dark) | 24K Champagne Gold |
 |:---:|:---:|
-| <img src="screenshots/07_now_playing_dark.jpg" alt="Now Playing Dark Theme" width="360" /> | <img src="screenshots/08_cover_flow_gold.jpg" alt="Cover Flow Gold Theme" width="360" /> |
-| **High-Contrast Night Mode** | **Luxury Brushed Metallic Accents** |
+| <img src="screenshots/07_now_playing_dark.jpg" alt="Dark theme" width="360" /> | <img src="screenshots/08_cover_flow_gold.jpg" alt="Gold theme" width="360" /> |
+| Pure black background for OLED screens | Brushed metallic gold wheel |
 
 ---
 
-## ✨ Key Features
+## What you get
 
-### 1. 🎛️ Contextual Rotary Click-Wheel
-- **Rotational Ballistic Physics**: Native C++ momentum calculation with exponential smoothing (EMA) and authentic flywheel inertia.
-- **Dual-Stage Micro-Haptics**: Independent tactile notch detents deliver a crisp physical feedback click on every discrete step.
-- **Multi-Profile Acoustic Feedback**: Switch between Ceramic Mechanical Click, Soft Relay, Classic Clicker, or Silent mode.
-- **Contextual Quadrants**: Top (Menu/Back), Bottom (Play/Pause), Left (Previous/Seek), Right (Next/Fast Forward), and Center Action button.
+### Touch Click-Wheel
+- Spin the wheel with your thumb to scroll through lists and adjust volume.
+- Real vibration feedback on every tick so you feel each step.
+- Four click sounds to pick from: Classic Clicker, Ceramic, Soft Relay, or Silent.
+- Dedicated button quadrants for Menu, Play/Pause, Next, Previous, and center Select.
 
-### 2. 🎚️ 10-Band Audiophile DSP & Analog Warmth
-- **10-Band Precision Equalizer**: Spline-interpolated curve with tactile detents for rotary frequency band sculpting.
-- **12AX7 Tube Triode Emulation**: Second-order even harmonic saturation for rich, warm acoustic presence and smooth vocal staging.
-- **15-IPS Studio Tape Warmth**: Subtle analog magnetic tape hysteresis with gentle high-frequency roll-off.
-- **ITU-R BS.1770 Volume Normalization**: Professional broadcast-grade loudness leveling to eliminate abrupt volume spikes.
-- **Bit-Perfect Audio**: Real-time USB DAC bypass detection and live Bluetooth Hi-Res codec badges (LDAC, aptX Adaptive, AAC, SBC).
+### 3D Cover Flow
+- Flip through your album covers in a 3D perspective stack.
+- Flick to spin through your collection with momentum.
+- Tap any album to open its tracklist.
 
-### 3. 💿 Authentic Navigation & Cover Flow
-- **3D Cover Flow**: Fluid horizontal album art scrubbing with real-time perspective tilt and gesture velocity flings.
-- **Split-Pane Menu Hierarchy**: Classic split-pane iPod layout with dynamic live preview cards.
-- **Smart Playlists**: 25 Most Played, Recently Played, Top Rated, and 90s Music automatically generated from local listening telemetry.
-- **Alphabet Scrub Overlay**: Rapid alphabet jumping when scrubbing through large multi-thousand track music libraries.
+### 10-Band Equalizer and Audio Warmth
+- 10-band EQ to shape your bass, mids, and treble.
+- Tube and tape saturation settings for a warmer, fuller sound.
+- Volume leveling to stop loud tracks from blasting your ears.
+- Direct output detection for USB DACs and Bluetooth codecs (LDAC, aptX, AAC, SBC).
 
-### 4. 🎨 Custom Skin Studio & Luxury Themes
-- **Built-in Luxury Finishes**: Classic Porcelain White, Obsidian Stealth, Monochrome Heritage, 24K Champagne Gold, Crimson Edition (U2), and Midnight Sapphire.
-- **Web-Based Skin Studio**: Interactive 2D/3D browser studio (`skin_studio/index.html`) to design custom `.rtskin` bundles with custom textures, wheel geometry, and color palettes.
-- **Safe Import/Export**: One-click ZIP/QR import with cryptographic bundle validation and memory-safe downsampling.
+### Themes
+- Classic Silver / Porcelain White
+- Obsidian Stealth Black (battery-friendly for OLED displays)
+- U2 Special Edition (black body with red accents)
+- 24K Champagne Gold
+- Midnight Sapphire Blue
 
----
-
-## 📥 Download & Installation
-
-The official production-hardened release APK is available directly on GitHub Releases:
-
-👉 **[Download Latest Release APK (v1.0.0)](https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest)**
-
-### Requirements
-- **OS**: Android 8.0 Oreo (API level 26) up to Android 15 / 16 (API level 36).
-- **Storage**: ~7.5 MB free space.
-- **Permissions**: Audio file read access (`READ_MEDIA_AUDIO` on Android 13+, `READ_EXTERNAL_STORAGE` on earlier versions).
+### Extra Features
+- **Music Quiz**: The classic iPod trivia game where you hear a snippet and guess the track.
+- **Smart Playlists**: Top 25 Most Played, Recently Played, and Top Rated playlists built automatically from your listening history.
+- **Queue Drawer**: Tap the title on the Now Playing screen to view and jump between upcoming songs.
+- **Custom Skin Studio**: A companion web editor (`skin_studio/index.html`) to build your own `.rtskin` theme packs.
 
 ---
 
-## 🏛️ System Architecture
+## Download and Setup
 
-RetroWheel is architected with strict separation of concerns, high-efficiency native performance, and zero main-thread audio blocking:
+1. Go to the [Releases](https://github.com/shubhambelbase/RetroWheel-Showcase/releases/latest) page and download `RetroWheel-Hardened-release.apk`.
+2. Tap the downloaded APK on your phone to install it. If prompted, allow installations from your browser or file manager.
+3. Open RetroWheel and grant storage permission when asked so it can find your local music files.
+4. Put your music files in your phone's `Music` folder. Supported formats include MP3, FLAC, M4A/AAC, OGG, and WAV.
 
-```text
-┌────────────────────────────────────────────────────────┐
-│               Jetpack Compose UI Layer                 │
-│   (ClickWheel, NowPlaying, CoverFlow, MenuListScreen)  │
-└───────────────────────────┬────────────────────────────┘
-                            │
-┌───────────────────────────▼────────────────────────────┐
-│              Native C++ Core Engine (JNI)              │
-│  - Ballistic Flywheel Physics & Friction Decay         │
-│  - 10-Band Spline Equalizer & Harmonic Warmth Transfer │
-│  - Kernel-Level Anti-Tamper & Cryptographic HMAC Token │
-└───────────────────────────┬────────────────────────────┘
-                            │
-┌───────────────────────────▼────────────────────────────┐
-│            AndroidX Media3 Audio Subsystem             │
-│  - Foreground PlaybackService & MediaSessionCompat     │
-│  - Low-latency AudioTrack with AudioFX Equalizer       │
-│  - Real-time USB DAC & Bluetooth Codec Routing         │
-└────────────────────────────────────────────────────────┘
-```
+### System requirements
+- Android 8.0 (Oreo) or newer.
+- Works on Android 8 through Android 16.
+- About 8 MB free storage for the app.
 
 ---
 
-## ⚖️ Ethical Monetization Model
+## How ads work
 
-RetroWheel adheres to a strict **Zero Listening Interruption Policy**:
-- **100% Free Forever**: All core music playback, library browsing, Cover Flow, manual 10-band EQ, and 4 core heritage themes are free forever.
-- **Zero Audio Ads**: Active playback is never interrupted by unprompted sound or popups.
-- **Voluntary Passes**: Premium exotic themes and specialized analog DSP warmth curves can be unlocked for 48 hours or 7 days by watching a voluntary rewarded video ad.
+Your music is never interrupted:
+- The core player, library browsing, Cover Flow, manual 10-band EQ, and default themes are completely free.
+- There are no banner ads while you browse and no audio ads while listening.
+- A few optional themes and analog warmth presets can be unlocked for 48 hours or 7 days by watching a voluntary rewarded video ad if you choose to.
 
 ---
 
-## 📄 Documentation & Links
+## Search Tags
+
+iPod Classic Android app, click wheel music player, Android iPod emulator, Cover Flow for Android, offline MP3 player, retro DAP, iPod style player, local music player with equalizer, haptic click wheel.
+
+---
+
+## Documentation
 
 - [Store Metadata & Descriptions](docs/STORE_METADATA.md)
 - [Privacy Policy](docs/PRIVACY_POLICY.md)
@@ -135,7 +124,7 @@ RetroWheel adheres to a strict **Zero Listening Interruption Policy**:
 
 ---
 
-## 🛡️ License & Intellectual Property
+## License
 
-Copyright © 2026 RetroWheel. All rights reserved.  
-The source code for this project is proprietary and maintained in a private repository. This public repository serves as the official portfolio showcase, public documentation, and release distribution channel.
+Copyright (c) 2026 RetroWheel. All rights reserved.  
+The source code is kept in a private repository. This repository hosts public downloads, documentation, skin studio tools, and release updates.
